@@ -1,0 +1,32 @@
+name: CI • Task Manager
+on:
+  push:
+    branches: [main, staging]
+    paths:
+      - 'projects/02-task-manager/**'
+      - '.github/workflows/task-manager.yml'
+  pull_request:
+    branches: [main, staging]
+    paths:
+      - 'projects/02-task-manager/**'
+      - '.github/workflows/task-manager.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-tasks-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/02-task-manager
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - run: npm install --no-audit --no-fund
+      - run: npm test
+      - run: npm run build

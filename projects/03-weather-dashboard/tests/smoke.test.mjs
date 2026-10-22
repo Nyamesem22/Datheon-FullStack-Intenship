@@ -1,0 +1,1 @@
+import test from 'node:test';import assert from 'node:assert/strict';import{readFileSync}from'node:fs';test('application entry exists',()=>{assert.match(readFileSync(new URL('../src/main.js',import.meta.url),'utf8'),/document|getElementById/)});
