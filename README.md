@@ -1,27 +1,30 @@
-# DATHEON Full Stack Internship — Four Independent Applications
+# DATHEON Full Stack Internship — Four Standalone Applications
 
-**Developer:** Emmanuella Adu-Boahene · **GitHub:** [Nyamesem22](https://github.com/Nyamesem22)
+**Developer:** Emmanuella Adu-Boahene • [GitHub profile](https://github.com/Nyamesem22)
 
-This monorepo contains four **standalone, independently built and deployed** DATHEON assessment projects. Each has its own package.json, application code, tests, CI workflow, and Vercel project.
+A single assessment repository containing **four independently deployable applications**. Each application has its own source code, dependencies, tests, CI workflow, Cloudflare Pages project, and separate staging/production configuration.
 
-| Assignment | Source | Staging | Production |
+| Project | Source | Staging | Production |
 | --- | --- | --- | --- |
-| Portfolio Website | [Open project](projects/01-portfolio-website) | Pending connection | Pending connection |
-| Task Manager | [Open project](projects/02-task-manager) | Pending connection | Pending connection |
-| Weather Dashboard | [Open project](projects/03-weather-dashboard) | Pending connection | Pending connection |
-| E-Commerce Store | [Open project](projects/04-ecommerce-store) | Pending connection | Pending connection |
+| Portfolio Website | [View source](projects/01-portfolio-website) | Pending Cloudflare setup | Pending Cloudflare setup |
+| Task Manager | [View source](projects/02-task-manager) | Pending Cloudflare setup | Pending Cloudflare setup |
+| Weather Dashboard | [View source](projects/03-weather-dashboard) | Pending Cloudflare setup | Pending Cloudflare setup |
+| E-Commerce Store | [View source](projects/04-ecommerce-store) | Pending Cloudflare setup | Pending Cloudflare setup |
 
-## Local development
-Install Node.js 22+. Enter a project directory, run `npm install`, `npm run dev`, `npm test`, and `npm run build`.
+## Infrastructure
+- **Hosting:** Cloudflare Pages — four separate projects linked to this monorepo.
+- **Backend APIs:** Cloudflare Pages Functions, added when each feature needs server-side operations.
+- **Database:** Neon PostgreSQL (server-side only; no secrets in frontend code).
+- **DB environments:** Isolated development/staging and production databases, using separate Neon branches or projects for each application that requires persistence.
+- **CI:** Separate path-filtered GitHub Actions tests/builds in `.github/workflows/`.
+- **CD:** Cloudflare Pages Git integration per project, `main` production and `staging` preview. Configure build-watch path rules to skip unrelated projects.
 
-## Delivery & branches
-- `feature/*` → PR into `staging` for development and acceptance checks.
-- `staging` → four separate Vercel **preview/staging deployments** (to configure).
-- `main` → four separate Vercel **production deployments** (to configure).
-- Each project has a path-filtered GitHub Actions quality workflow. Only touched projects' jobs run.
-- Do not merge untested code into main. Never commit tokens or .env files.
+## Branch policy
+Develop on `feature/*` → PR into `staging` → QA → PR into `main`. `main` is not modified by setup commits until review.
 
-## DATHEON assessment
-Each application should be evaluated independently from the links above. Live URLs will be added when Vercel has been connected and verified. **Scaffolds are not finished assignments.**
+## Local run
+Each application: `cd projects/<folder>` then `npm install && npm run dev`; test with `npm test` and build with `npm run build`.
 
-See [deployment setup](docs/DEPLOYMENT.md).
+**Status:** Initial working scaffolds only, not completed DATHEON assignments. Hosting and Neon connections are not yet provisioned.
+
+See [Cloudflare hosting and Neon setup](docs/DEPLOYMENT.md).

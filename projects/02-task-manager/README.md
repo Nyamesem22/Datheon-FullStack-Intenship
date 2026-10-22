@@ -1,8 +1,8 @@
 # Task Manager
 
-Standalone DATHEON internship project within the four-application monorepo.
+Standalone DATHEON application in the shared monorepo.
 
-## Run
+## Run locally
 ```bash
 npm install
 npm run dev
@@ -10,9 +10,16 @@ npm test
 npm run build
 ```
 
-## Deployment
-- Staging: not connected yet
-- Production: not connected yet
-- Vercel root directory: `projects/02-task-manager`
+## Deployment configuration
+- Hosting: Cloudflare Pages (not connected yet)
+- Git repository: `Nyamesem22/Datheon-FullStack-Intenship`
+- Pages project root: `projects/02-task-manager`
+- Production branch: `main`; production URL: pending
+- Staging preview branch: `staging`; staging URL: pending
+- Build command: `npm run build` → output `dist`
+- CI: dedicated GitHub Actions workflow
 
-This is initial starter functionality. Expand against the DATHEON task requirements and replace demo content before submission.
+## PostgreSQL persistence
+Neon PostgreSQL is the database provider for any required persistent backend features. Use only server-side Cloudflare Pages Functions or Workers and separately provisioned staging and production credentials. **No live Neon database is connected to this starter yet.**
+
+See [Deployment guide](../../docs/DEPLOYMENT.md).
