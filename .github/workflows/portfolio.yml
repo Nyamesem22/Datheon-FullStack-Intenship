@@ -1,0 +1,32 @@
+name: CI • Portfolio Website
+on:
+  push:
+    branches: [main, staging]
+    paths:
+      - 'projects/01-portfolio-website/**'
+      - '.github/workflows/portfolio.yml'
+  pull_request:
+    branches: [main, staging]
+    paths:
+      - 'projects/01-portfolio-website/**'
+      - '.github/workflows/portfolio.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-portfolio-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/01-portfolio-website
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - run: npm install --no-audit --no-fund
+      - run: npm test
+      - run: npm run build
